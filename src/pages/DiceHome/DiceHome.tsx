@@ -2,8 +2,9 @@ import { ChangeEvent, useEffect, useState } from "react";
 import DicePlatform from "../../containers/DicePlatform";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { findKeyWithHighestValue, generatePlayerArray, rollDice } from "../../utils/functions";
+import { displayPlayer, findKeyWithHighestValue, generatePlayerArray, rollDice } from "../../utils/functions";
 import { NumberDictionary } from "../../utils/types";
+import DiceScore from "../../containers/DiceScore";
 
 
 
@@ -13,8 +14,8 @@ const DiceHome = () => {
     const [dices, setDices] = useState({ dice1: 0, dice2: 0 })
     const [playerPlayedCount, setPlayerPlayedCount] = useState(0)
     const [playerTurn, setPlayerTurn] = useState([] as number[])
-    const [winnerIndex, setWinnerIndex] = useState(null as null|number)
-    
+    const [winnerIndex, setWinnerIndex] = useState(null as null | number)
+
     const currentPlayerIndex = playerTurn[playerPlayedCount]
 
     const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,48 +45,59 @@ const DiceHome = () => {
     const isPlay = playerTurn.length !== 0
 
 
-    useEffect(()=>{
-        const {dice1,dice2}=dices
-        
-        if(dice1 && dice2 && currentPlayerIndex !== null && currentPlayerIndex !== undefined){
-            playerScore[currentPlayerIndex]= dice1+dice2
-            setPlayerScore({...playerScore})
+    useEffect(() => {
+        const { dice1, dice2 } = dices
+
+        if (dice1 && dice2 && currentPlayerIndex !== null && currentPlayerIndex !== undefined) {
+            playerScore[currentPlayerIndex] = dice1 + dice2
+            setPlayerScore({ ...playerScore })
             setPlayerPlayedCount(playerPlayedCount + 1)
         }
-    },[dices])
+    }, [dices])
 
-    useEffect(()=>{
+    useEffect(() => {
         const tempWinner = findKeyWithHighestValue(playerScore)
-        if(isWinner && tempWinner){
+        if (isWinner && tempWinner) {
             setWinnerIndex(Number(tempWinner))
         }
-        
-    },[isWinner])
 
-    console.log("SCORE ==========", playerScore);
-  
+    }, [isWinner])
+
+
     return (
 
-        <div className="flex flex-col items-center h-full justify-between">
+        <div className="flex flex-col items-center h-full ">
             <div className="flex flex-col items-center">
-                <div> Player number </div>
-                <div className="flex">
-                    <div><Input onChange={onChangeInput} /></div>
-                    <div><Button disabled={isPlay} onClick={handleSetTotalPlayer} className="text-white" label="Set" /></div>
-                </div>
+                {!isPlay && (
+                    <div>
+                        <div> Player number </div>
+                        <div className="flex">
+                            <div><Input onChange={onChangeInput} /></div>
+                            <div><Button disabled={isPlay} onClick={handleSetTotalPlayer} className="text-white" label="Set" /></div>
+                        </div>
+                    </div>
+
+                )}
+
+                {
+                    isPlay && (
+                        <DiceScore playerScore={playerScore}/>
+                    )
+                }
+
 
             </div>
             <div className="flex h-full w-full items-center justify-center">
                 {isPlay ? (
-                <DicePlatform handleReset={handleReset} currentPlayerIndex={currentPlayerIndex} isWinner={isWinner} dices={dices} handlePlayerPlayed={handlePlayerPlayed} playerPlayedCount={playerPlayedCount} playerTurn={playerTurn} />
-                ):(
+                    <DicePlatform handleReset={handleReset} currentPlayerIndex={currentPlayerIndex} isWinner={isWinner} dices={dices} handlePlayerPlayed={handlePlayerPlayed} playerPlayedCount={playerPlayedCount} playerTurn={playerTurn} />
+                ) : (
                     <h1> Set player number</h1>
                 )}
             </div>
 
             {isPlay && isWinner && (
                 <div className="flex h-full w-full items-center justify-center">
-                    Winner is Player {winnerIndex}
+                    Winner is Player {displayPlayer(winnerIndex)}
                 </div>
             )}
 

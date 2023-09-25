@@ -1,4 +1,5 @@
 import Button from "../../components/Button";
+import { displayPlayer } from "../../utils/functions";
 
 interface Dices {
     dice1: number
@@ -25,7 +26,7 @@ const DicePlatform = (props: DicePlatformProps) => {
 
     return (
         <div className="">
-            {!isWinner && (<h3>It is your turn : Player {currentPlayerIndex}</h3>)}
+            {!isWinner && (<h3>It is your turn : Player {displayPlayer(currentPlayerIndex)}</h3>)}
             
             <div>
 
