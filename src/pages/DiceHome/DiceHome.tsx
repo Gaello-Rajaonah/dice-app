@@ -66,14 +66,18 @@ const DiceHome = () => {
 
     return (
 
-        <div className="flex flex-col items-center h-full ">
-            <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center h-full w-full">
+
+
+            <div className="flex flex-[0.1] w-full flex-col items-center">
+
                 {!isPlay && (
-                    <div>
-                        <div> Player number </div>
-                        <div className="flex">
-                            <div><Input onChange={onChangeInput} /></div>
-                            <div><Button disabled={isPlay} onClick={handleSetTotalPlayer} className="text-white" label="Set" /></div>
+                    <div className="flex flex-col w-full items-center">
+                        
+                        <h1> Player number </h1>
+                        <div className="flex w-full items-center justify-center">
+                            <div className="flex"><Input onChange={onChangeInput} /></div>
+                            <div className="flex w-40 ms-8"><Button disabled={isPlay} onClick={handleSetTotalPlayer} className="text-white" label="Set" /></div>
                         </div>
                     </div>
 
@@ -81,13 +85,17 @@ const DiceHome = () => {
 
                 {
                     isPlay && (
-                        <DiceScore playerScore={playerScore}/>
+                        <DiceScore playerScore={playerScore} />
                     )
                 }
 
 
+
+
             </div>
-            <div className="flex h-full w-full items-center justify-center">
+
+
+            <div className="flex flex-[0.8] h-full w-full items-center justify-center">
                 {isPlay ? (
                     <DicePlatform handleReset={handleReset} currentPlayerIndex={currentPlayerIndex} isWinner={isWinner} dices={dices} handlePlayerPlayed={handlePlayerPlayed} playerPlayedCount={playerPlayedCount} playerTurn={playerTurn} />
                 ) : (
@@ -95,11 +103,11 @@ const DiceHome = () => {
                 )}
             </div>
 
-            {isPlay && isWinner && (
-                <div className="flex h-full w-full items-center justify-center">
-                    Winner is Player {displayPlayer(winnerIndex)}
-                </div>
-            )}
+            <div className="flex flex-[0.1] h-full w-full items-center justify-center">
+                {isPlay && isWinner && (
+                    <span>Winner is Player {displayPlayer(winnerIndex)}</span>
+                )}
+            </div>
 
 
         </div>

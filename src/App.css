@@ -40,3 +40,11 @@
     transform: rotate(360deg);
   }
 }
+
+h1{
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Courier New';
+  font-size: 25px;
+}
