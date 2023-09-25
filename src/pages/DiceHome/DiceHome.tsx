@@ -85,7 +85,10 @@ const DiceHome = () => {
 
                 {
                     isPlay && (
+                        <div className="mt-8">
                         <DiceScore playerScore={playerScore} />
+
+                        </div>
                     )
                 }
 
@@ -105,7 +108,7 @@ const DiceHome = () => {
 
             <div className="flex flex-[0.1] h-full w-full items-center justify-center">
                 {isPlay && isWinner && (
-                    <span>Winner is Player {displayPlayer(winnerIndex)}</span>
+                    <h1 className="mb-8">Player {displayPlayer(winnerIndex)} wins !!</h1>
                 )}
             </div>
 

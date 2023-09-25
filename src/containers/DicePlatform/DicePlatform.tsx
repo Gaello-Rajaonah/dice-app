@@ -25,22 +25,20 @@ const DicePlatform = (props: DicePlatformProps) => {
     }
 
     return (
-        <div className="">
-            {!isWinner && (<h3>It is your turn : Player {displayPlayer(currentPlayerIndex)}</h3>)}
+        <div className="flex flex-col  p-10 w-[60rem] h-[40rem] border-2 border-black">
+            <div className="flex flex-[0.1] w-full">
+            {!isWinner && (<h2>It is your turn : Player {displayPlayer(currentPlayerIndex)}</h2>)}
+            </div>
             
-            <div>
-
-                Dice container
+            <div className="flex flex-[0.7]">
                 <div>Dice 1: {dice1}</div>
                 <div>Dice 2: {dice2}</div>
 
             </div>
 
-            <div>
-                Play reset container
+            <div className="flex flex-col flex-[0.2]">
                 {!isWinner && (<div><Button onClick={handlePlay} className="text-white" label="Play" /></div>)}
-
-                <div><Button onClick={handleReset} className="text-white" label="Reset" /></div>
+                <div className="mt-6"><Button onClick={handleReset} className="text-white" label="Reset" /></div>
             </div>
         </div>
     );

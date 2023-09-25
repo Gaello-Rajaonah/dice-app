@@ -42,9 +42,17 @@
 }
 
 h1{
-  background: -webkit-linear-gradient(#eee, #333);
+  background: -webkit-linear-gradient(#979494, #333);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'Courier New';
   font-size: 25px;
+}
+
+h2{
+  background: -webkit-linear-gradient(#979494, #1b1a1a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Courier New';
+  font-size: 15px;
 }
