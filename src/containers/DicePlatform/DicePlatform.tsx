@@ -36,12 +36,19 @@ const DicePlatform = (props: DicePlatformProps) => {
 
                     <div className="flex w-full items-center justify-around">
                         <div ><Dice value={dice1} /></div>
+                        <div>
+                            <h1>
+                                {dice1 + dice2}
+                            </h1>
+                        </div>
                         <div><Dice value={dice2} /></div>
                     </div>
                 )}
 
 
             </div>
+
+
 
             <div className="flex flex-col flex-[0.2]">
                 {!isWinner && (<div><Button onClick={handlePlay} className="text-white" label="Play" /></div>)}
