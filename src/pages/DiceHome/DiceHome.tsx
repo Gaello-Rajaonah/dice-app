@@ -29,7 +29,9 @@ const DiceHome = () => {
     }
 
     const handlePlayerPlayed = () => {
-        setDices({ ...dices, dice1: rollDice(), dice2: rollDice() })
+        setTimeout(()=>{
+            setDices({ ...dices, dice1: rollDice(), dice2: rollDice() })
+        },400)
     }
 
     const handleReset = () => {
