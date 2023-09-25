@@ -5,21 +5,28 @@ import Button from "../../components/Button";
 import { generatePlayerArray } from "../../utils/functions";
 
 const DiceHome = () => {
-    const [totalPlayer,setTotalPlayer] = useState(0)
-    const [playerScore,setPlayerScore] = useState({})
-    const [dices,setDices]=useState({dice1:0,dice2:0})
-    const [playerPlayed,setPlayerPlayed] = useState(0)
-    const [playerTurn,setPlayerTurn] = useState([] as number[])
+    const [totalPlayer, setTotalPlayer] = useState(0)
+    const [playerScore, setPlayerScore] = useState({})
+    const [dices, setDices] = useState({ dice1: 0, dice2: 0 })
+    const [playerPlayedCount, setPlayerPlayedCount] = useState(0)
+    const [playerTurn, setPlayerTurn] = useState([] as number[])
 
     const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-        const value =  e.target.value ;
+        const value = e.target.value;
         setTotalPlayer(Number(value));
-      };
+    };
 
-    const onSetTotalPlayer = ()=>{
-       const playerArray= generatePlayerArray(totalPlayer)
-       setPlayerTurn(playerArray)
+    const handleSetTotalPlayer = () => {
+        const playerArray = generatePlayerArray(totalPlayer)
+        setPlayerTurn(playerArray)
     }
+
+    const handlePlayerPlayed = () => {
+        setPlayerPlayedCount(playerPlayedCount + 1)
+        setDices({ ...dices, dice1: 3, dice2: 5 })
+    }
+
+    const isWinner = playerPlayedCount == totalPlayer
 
 
     return (
@@ -28,18 +35,21 @@ const DiceHome = () => {
             <div className="flex flex-col items-center">
                 <div> Player number </div>
                 <div className="flex">
-                    <div><Input onChange={onChangeInput}/></div>
-                    <div><Button onClick={onSetTotalPlayer} className="text-white" label="Set"/></div>
+                    <div><Input onChange={onChangeInput} /></div>
+                    <div><Button onClick={handleSetTotalPlayer} className="text-white" label="Set" /></div>
                 </div>
 
             </div>
             <div className="flex h-full w-full items-center justify-center">
-                <DicePlatform />
+                <DicePlatform dices={dices} handlePlayerPlayed={handlePlayerPlayed} playerPlayedCount={playerPlayedCount} playerTurn={playerTurn} />
             </div>
 
-            <div className="flex h-full w-full items-center justify-center">
-                Winner is Player 1
-            </div>
+            {isWinner && (
+                <div className="flex h-full w-full items-center justify-center">
+                    Winner is Player 1
+                </div>
+            )}
+
 
         </div>
 
