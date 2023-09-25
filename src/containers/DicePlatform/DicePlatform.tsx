@@ -9,13 +9,14 @@ interface DicePlatformProps {
     playerTurn: number[]
     playerPlayedCount: number
     handlePlayerPlayed: () => void
+    handleReset: () => void
     dices: Dices
     isWinner: boolean
     currentPlayerIndex: number
 }
 
 const DicePlatform = (props: DicePlatformProps) => {
-    const { handlePlayerPlayed, dices, isWinner, currentPlayerIndex } = props
+    const { handlePlayerPlayed, handleReset, dices, isWinner, currentPlayerIndex } = props
     const { dice1, dice2 } = dices
 
     const handlePlay = () => {
@@ -24,7 +25,7 @@ const DicePlatform = (props: DicePlatformProps) => {
 
     return (
         <div className="">
-            {!isWinner && (<h3>Current Player: Player {currentPlayerIndex}</h3>)}
+            {!isWinner && (<h3>It is your turn : Player {currentPlayerIndex}</h3>)}
             
             <div>
 
@@ -38,7 +39,7 @@ const DicePlatform = (props: DicePlatformProps) => {
                 Play reset container
                 {!isWinner && (<div><Button onClick={handlePlay} className="text-white" label="Play" /></div>)}
 
-                <div><Button className="text-white" label="Reset" /></div>
+                <div><Button onClick={handleReset} className="text-white" label="Reset" /></div>
             </div>
         </div>
     );

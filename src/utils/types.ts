@@ -1,0 +1,1 @@
+export type NumberDictionary = Record<number, number>;
