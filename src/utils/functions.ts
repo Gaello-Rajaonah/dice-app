@@ -14,4 +14,10 @@ const generatePlayerArray = (N:number) =>{
     return result;
 }
 
-export {generatePlayerArray}
+
+function rollDice() {
+    const diceValue = Math.floor(Math.random() * 6) + 1;
+    return diceValue;
+  }
+
+export {generatePlayerArray,rollDice}

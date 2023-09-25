@@ -1,48 +1,47 @@
 import Button from "../../components/Button";
 
-interface Dices{
-    dice1:number
-    dice2:number
+interface Dices {
+    dice1: number
+    dice2: number
 }
 
-interface DicePlatformProps{
+interface DicePlatformProps {
     playerTurn: number[]
     playerPlayedCount: number
-    handlePlayerPlayed : ()=>void
+    handlePlayerPlayed: () => void
     dices: Dices
+    isWinner: boolean
+    currentPlayerIndex: number
 }
 
 const DicePlatform = (props: DicePlatformProps) => {
+    const { handlePlayerPlayed, dices, isWinner, currentPlayerIndex } = props
+    const { dice1, dice2 } = dices
 
-    const {playerTurn,playerPlayedCount,handlePlayerPlayed,dices} = props
-
-    const score = dices.dice1 + dices.dice2
-
-    const handlePlay= ()=>{
+    const handlePlay = () => {
         handlePlayerPlayed()
     }
 
     return (
-      <div className="">
-         <h3>Current Player: Player 1</h3>
-
-         <h3>Score: {score}</h3>
-
-         <div>
+        <div className="">
+            {!isWinner && (<h3>Current Player: Player {currentPlayerIndex}</h3>)}
             
-            Dice container
-            <div>Dice 1</div>
-            <div>Dice 2</div>
+            <div>
 
-         </div>
+                Dice container
+                <div>Dice 1: {dice1}</div>
+                <div>Dice 2: {dice2}</div>
 
-         <div>
-            Play reset container
-            <div><Button onClick={handlePlay} className="text-white" label="Play"/></div>
-            <div><Button className="text-white" label="Reset"/></div>
-         </div>
-      </div>
+            </div>
+
+            <div>
+                Play reset container
+                {!isWinner && (<div><Button onClick={handlePlay} className="text-white" label="Play" /></div>)}
+
+                <div><Button className="text-white" label="Reset" /></div>
+            </div>
+        </div>
     );
-  };
-  
-  export default DicePlatform;
+};
+
+export default DicePlatform;
