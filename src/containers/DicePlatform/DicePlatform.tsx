@@ -1,4 +1,5 @@
 import Button from "../../components/Button";
+import Dice from "../../components/Dice";
 import { displayPlayer } from "../../utils/functions";
 
 interface Dices {
@@ -27,12 +28,18 @@ const DicePlatform = (props: DicePlatformProps) => {
     return (
         <div className="flex flex-col  p-10 w-[60rem] h-[40rem] border-2 border-black">
             <div className="flex flex-[0.1] w-full">
-            {!isWinner && (<h2>It is your turn : Player {displayPlayer(currentPlayerIndex)}</h2>)}
+                {!isWinner && (<h2>It is your turn : Player {displayPlayer(currentPlayerIndex)}</h2>)}
             </div>
-            
+
             <div className="flex flex-[0.7]">
-                <div>Dice 1: {dice1}</div>
-                <div>Dice 2: {dice2}</div>
+                {!!dice1 && !!dice2 && (
+
+                    <div className="flex w-full items-center justify-around">
+                        <div ><Dice value={dice1} /></div>
+                        <div><Dice value={dice2} /></div>
+                    </div>
+                )}
+
 
             </div>
 
